@@ -2,12 +2,17 @@ package az.example.online.shopping.infrastructure.web.controller;
 
 import az.example.online.shopping.domain.handler.comman.concretes.SignUpCommandHandler;
 import az.example.online.shopping.infrastructure.web.dto.request.command.LoginCommand;
-import az.example.online.shopping.infrastructure.web.dto.request.command.RefreshTokenCommand;
 import az.example.online.shopping.infrastructure.web.dto.request.command.UserSignUpCommand;
 import az.example.online.shopping.infrastructure.web.dto.response.AuthResponseModel;
-import az.example.online.shopping.infrastructure.web.dto.response.ResponseModel;
+import az.example.online.shopping.infrastructure.web.dto.response.SignUpResponseModel;
 import az.example.online.shopping.infrastructure.web.service.abstracts.AbstractJwtService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,30 +30,27 @@ public class AuthController {
 
 
     @PostMapping("/signup")
-    public ResponseModel<String> signup(@RequestBody UserSignUpCommand command) {
+    public ResponseEntity<SignUpResponseModel> signup(@RequestBody UserSignUpCommand command) {
         signUpCommandHandler.handle(command);
-        return ResponseModel.created("User Successfully Created");
+        return new ResponseEntity<>(new SignUpResponseModel("User successfully signed"), HttpStatus.CREATED);
     }
 
     @PostMapping("/login")
-    public ResponseModel<AuthResponseModel> login(@RequestBody LoginCommand request) {
+    public ResponseEntity<AuthResponseModel> login(@RequestBody LoginCommand request) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getPhoneNumber(), request.getPassword()));
 
         String accessToken = jwtService.generateAccessToken(request.getPhoneNumber());
         String refreshToken = jwtService.generateRefreshToken(request.getPhoneNumber());
 
-        return ResponseModel.accepted(
-                AuthResponseModel.builder().accessToken(accessToken).refreshToken(refreshToken).build(),
-                "User Successfully Login");
+        return new ResponseEntity<>(AuthResponseModel.builder().accessToken(accessToken).refreshToken(refreshToken).build(), HttpStatus.ACCEPTED);
+
     }
 
     @PostMapping("/refresh")
-    public ResponseModel<AuthResponseModel> refresh(@RequestBody RefreshTokenCommand command) {
+    public ResponseEntity<AuthResponseModel> refresh(HttpServletRequest request,
+                                                     @NonNull HttpServletResponse response) {
         String accessToken =
-                jwtService.validateRefreshTokenAndGenerateAccessToken(
-                        command.getRefreshToken());
-        return ResponseModel.ok(
-                AuthResponseModel.builder().accessToken(accessToken).build(),
-                "User Successfully Refreshed");
+                jwtService.validateRefreshTokenAndGenerateAccessToken(request, response);
+        return new ResponseEntity<>(AuthResponseModel.builder().accessToken(accessToken).build(), HttpStatus.OK);
     }
 }
