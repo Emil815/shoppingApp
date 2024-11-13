@@ -1,5 +1,6 @@
 package az.example.online.shopping.infrastructure.web.service.concretes;
 
+import az.example.online.shopping.infrastructure.web.dto.response.AuthResponseModel;
 import az.example.online.shopping.infrastructure.web.service.abstracts.AbstractJwtService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -87,8 +88,8 @@ public class JwtService implements AbstractJwtService {
         return extractAllClaims(token).getExpiration().before(new Date());
     }
 
-    public String validateRefreshTokenAndGenerateAccessToken(HttpServletRequest request,
-                                                             @NonNull HttpServletResponse response) {
+    public AuthResponseModel validateRefreshTokenAndGenerateAccessToken(HttpServletRequest request,
+                                                                        @NonNull HttpServletResponse response) {
         try {
             final String authHeader = request.getHeader("Authorization");
             final String jwt;
@@ -114,7 +115,10 @@ public class JwtService implements AbstractJwtService {
 
             if ("REFRESH".equals(tokenType) && !isTokenExpired(jwt)) {
                 String phoneNumber = extractUsername(jwt);
-                return generateAccessToken(phoneNumber);
+                return AuthResponseModel.builder()
+                        .accessToken(generateAccessToken(phoneNumber))
+                        .refreshToken(jwt)
+                        .build();
             } else {
                 throw new IllegalArgumentException("Invalid or expired refresh token");
             }

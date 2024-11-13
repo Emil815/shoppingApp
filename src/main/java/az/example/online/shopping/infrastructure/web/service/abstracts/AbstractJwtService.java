@@ -1,5 +1,6 @@
 package az.example.online.shopping.infrastructure.web.service.abstracts;
 
+import az.example.online.shopping.infrastructure.web.dto.response.AuthResponseModel;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -26,6 +27,6 @@ public interface AbstractJwtService {
 
     boolean isTokenExpired(String token);
 
-    String validateRefreshTokenAndGenerateAccessToken(HttpServletRequest request,
-                                                      @NonNull HttpServletResponse response);
+    AuthResponseModel validateRefreshTokenAndGenerateAccessToken(HttpServletRequest request,
+                                                                 @NonNull HttpServletResponse response);
 }
