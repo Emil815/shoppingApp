@@ -73,5 +73,23 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.1.0</version> <!-- use the version appropriate for your project -->
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <Main-Class>az.Main</Main-Class> <!-- Replace with your main class -->
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
 
 </project>
