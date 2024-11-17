@@ -1,5 +1,6 @@
 package az.example.online.shopping.infrastructure.web.config;
 
+import az.example.online.shopping.domain.valueobjects.RoleEnum;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -33,8 +34,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/api/auth/**",
+                                "/api/product/**",
                                 "/swagger-ui/**",
                                 "/v3/api-docs/**").permitAll()
+                        .requestMatchers("/api/admin/**").hasRole(RoleEnum.ADMIN.name())
                         .anyRequest().authenticated()
 
 
