@@ -7,6 +7,6 @@
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
 
-    <include file="db/changelog/pre-persist/db.changelog-pre-persist.xml"/>
+    <include file="role/001-insert-roles.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

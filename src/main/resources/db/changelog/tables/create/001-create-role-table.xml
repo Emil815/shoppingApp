@@ -13,13 +13,13 @@
             <column name="id" type="uuid">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="createdAt" type="timestamp">
+            <column name="created_at" type="timestamp">
                 <constraints nullable="false"/>
             </column>
-            <column name="updatedAt" type="timestamp">
+            <column name="updated_at" type="timestamp">
                 <constraints nullable="false"/>
             </column>
-            <column name="isActive" type="boolean">
+            <column name="is_active" type="boolean">
                 <constraints nullable="false"/>
             </column>
             <column name="name" type="varchar(255)">

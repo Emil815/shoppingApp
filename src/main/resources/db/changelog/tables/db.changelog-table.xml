@@ -7,10 +7,10 @@
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
 
-    <include file="db/changelog/tables/create/001-create-role-table.xml"/>
-    <include file="db/changelog/tables/create/002-create-user-table.xml"/>
-    <include file="db/changelog/tables/create/003-create-user-role-table.xml"/>
-    <include file="db/changelog/tables/create/004-create-product-table.xml"/>
+    <include file="create/001-create-role-table.xml" relativeToChangelogFile="true"/>
+    <include file="create/002-create-user-table.xml" relativeToChangelogFile="true"/>
+    <include file="create/003-create-user-role-table.xml" relativeToChangelogFile="true"/>
+    <include file="create/004-create-product-table.xml" relativeToChangelogFile="true"/>
 
 
 </databaseChangeLog>

@@ -12,13 +12,13 @@
             <column name="id" type="uuid">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="createdAt" type="timestamp">
+            <column name="created_at" type="timestamp">
                 <constraints nullable="false"/>
             </column>
-            <column name="updatedAt" type="timestamp">
+            <column name="updated_at" type="timestamp">
                 <constraints nullable="false"/>
             </column>
-            <column name="isActive" type="boolean">
+            <column name="is_active" type="boolean">
                 <constraints nullable="false"/>
             </column>
 
@@ -28,28 +28,28 @@
             <column name="category" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="subCategory" type="varchar(255)">
+            <column name="sub_category" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
             <column name="code" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="sellPrice" type="decimal(19,2)">
+            <column name="sell_price" type="decimal(19,2)">
                 <constraints nullable="false"/>
             </column>
-            <column name="wholeSalePrice" type="decimal(19,2)">
+            <column name="whole_sale_price" type="decimal(19,2)">
                 <constraints nullable="false"/>
             </column>
             <column name="quantity" type="int">
                 <constraints nullable="false"/>
             </column>
-            <column name="imageName" type="varchar(255)">
+            <column name="image_name" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="imageType" type="varchar(255)">
+            <column name="image_type" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="imageData" type="bytea">
+            <column name="image_data" type="bytea">
                 <constraints nullable="false"/>
             </column>
             <column name="note" type="text"/>
