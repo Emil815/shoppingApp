@@ -19,11 +19,17 @@ import java.util.Set;
 @Table(name = "users")
 public class UserEntity extends BaseEntity {
 
+    @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false)
     private String surname;
+
+    @Column(nullable = false)
     private String password;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
+
     private String phoneNumber;
 
     @ManyToMany(fetch = FetchType.EAGER)

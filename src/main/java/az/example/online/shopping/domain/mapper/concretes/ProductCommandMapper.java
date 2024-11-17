@@ -19,6 +19,8 @@ public class ProductCommandMapper implements AbstractProductCommandMapper {
             return ProductRoot
                     .builder()
                     .name(command.getName())
+                    .code(command.getCode())
+                    .article(command.getArticle())
                     .description(command.getDescription())
                     .category(command.getCategory())
                     .subCategory(command.getSubCategory())
@@ -42,6 +44,8 @@ public class ProductCommandMapper implements AbstractProductCommandMapper {
                 .builder()
                 .name(root.getName())
                 .description(root.getDescription())
+                .code(root.getCode())
+                .article(root.getArticle())
                 .category(root.getCategory())
                 .subCategory(root.getSubCategory())
                 .note(root.getNote())
@@ -59,6 +63,8 @@ public class ProductCommandMapper implements AbstractProductCommandMapper {
         return ProductResponse
                 .builder()
                 .name(entity.getName())
+                .code(entity.getCode())
+                .article(entity.getArticle())
                 .description(entity.getDescription())
                 .category(entity.getCategory())
                 .subCategory(entity.getSubCategory())
@@ -71,8 +77,6 @@ public class ProductCommandMapper implements AbstractProductCommandMapper {
                 .imageData(entity.getImageData())
                 .build();
     }
-
-
 
 
 }

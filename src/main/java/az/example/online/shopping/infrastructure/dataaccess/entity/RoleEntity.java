@@ -1,10 +1,7 @@
 package az.example.online.shopping.infrastructure.dataaccess.entity;
 
 import az.example.online.shopping.domain.valueobjects.RoleEnum;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,6 +19,7 @@ public class RoleEntity extends BaseEntity  {
 
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private RoleEnum name;
 
 

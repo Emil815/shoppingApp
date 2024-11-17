@@ -31,7 +31,7 @@ public class SignUpCommandHandler {
         if (userRepository.findByPhoneNumber(userRoot.getPhoneNumber()).isPresent()) {
             throw new RuntimeException("User already exists");
         }
-        RoleEntity userRole = roleRepository.findByName(RoleEnum.USER)
+        RoleEntity userRole = roleRepository.findByName(RoleEnum.ROLE_USER)
                 .orElseThrow(() -> new RuntimeException("Role does not exist"));
         userRoot.initialize();
         userRoot.setRoles(Set.of(roleCommandMapper.toRoot(userRole)));

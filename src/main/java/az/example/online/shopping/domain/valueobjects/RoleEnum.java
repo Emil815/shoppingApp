@@ -1,5 +1,5 @@
 package az.example.online.shopping.domain.valueobjects;
 
 public enum RoleEnum {
-    ADMIN, MODERATOR, USER
+    ROLE_ADMIN, ROLE_MODERATOR, ROLE_USER
 }

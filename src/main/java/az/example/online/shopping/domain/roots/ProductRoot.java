@@ -17,6 +17,8 @@ import java.util.UUID;
 @Data
 public class ProductRoot extends BaseRoot<UUID> {
     private String name;
+    private String code;
+    private String article;
     private String description;
     private String category;
     private String subCategory;
@@ -27,4 +29,5 @@ public class ProductRoot extends BaseRoot<UUID> {
     private String imageName;
     private String imageType;
     private byte[] imageData;
+
 }

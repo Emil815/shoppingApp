@@ -1,5 +1,6 @@
 package az.example.online.shopping.infrastructure.dataaccess.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -18,18 +19,37 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "products")
 public class ProductEntity extends BaseEntity {
+    @Column(nullable = false)
     private String name;
-    private String description;
 
+    @Column(nullable = false)
     private String category;
 
+    @Column(nullable = false)
     private String subCategory;
-    private String note;
+
+    @Column(nullable = false)
+    private String code;
+
+    @Column(nullable = false)
     private BigDecimal sellPrice;
+
+    @Column(nullable = false)
     private BigDecimal wholeSalePrice;
+
+    @Column(nullable = false)
     private Integer quantity;
+
+    @Column(nullable = false)
     private String imageName;
+
+    @Column(nullable = false)
     private String imageType;
 
+    @Column(nullable = false)
     private byte[] imageData;
+
+    private String note;
+    private String description;
+    private String article;
 }

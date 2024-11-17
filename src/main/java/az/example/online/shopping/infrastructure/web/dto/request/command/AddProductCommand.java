@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Data
 @Builder
+
 public class AddProductCommand {
     private String name;
     private String description;
@@ -22,6 +23,8 @@ public class AddProductCommand {
     private BigDecimal wholeSalePrice;
     private LocalDateTime releaseDate;
     private Integer quantity;
+    private String code;
+    private String article;
 
 
 }
