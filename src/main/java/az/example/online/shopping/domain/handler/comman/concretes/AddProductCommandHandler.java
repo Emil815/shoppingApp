@@ -16,7 +16,7 @@ public class AddProductCommandHandler {
     private final ProductRepository productRepository;
     private final AbstractProductCommandMapper productCommandMapper;
 
-    public ProductResponse addProduct(AddProductCommand command, MultipartFile file) {
+    public ProductResponse handle(AddProductCommand command, MultipartFile file) {
         ProductRoot productRoot = productCommandMapper.toRoot(command, file);
         ProductEntity savedProduct = productRepository.save(this.productCommandMapper.toEntity(productRoot));
         return productCommandMapper.toResponseModel(savedProduct);

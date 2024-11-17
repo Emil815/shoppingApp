@@ -5,6 +5,7 @@ import az.example.online.shopping.domain.roots.ProductRoot;
 import az.example.online.shopping.domain.valueobjects.Money;
 import az.example.online.shopping.infrastructure.dataaccess.entity.ProductEntity;
 import az.example.online.shopping.infrastructure.web.dto.request.command.AddProductCommand;
+import az.example.online.shopping.infrastructure.web.dto.request.command.UpdateProductCommand;
 import az.example.online.shopping.infrastructure.web.dto.response.ProductResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,7 +27,7 @@ public class ProductCommandMapper implements AbstractProductCommandMapper {
                     .subCategory(command.getSubCategory())
                     .note(command.getNote())
                     .sellPrice(Money.of(command.getSellPrice()))
-                    .wholeSalePrice(Money.of(command.getSellPrice()))
+                    .wholeSalePrice(Money.of(command.getWholeSalePrice()))
                     .quantity(command.getQuantity())
                     .imageName(file.getName())
                     .imageType(file.getContentType())
@@ -50,12 +51,36 @@ public class ProductCommandMapper implements AbstractProductCommandMapper {
                 .subCategory(root.getSubCategory())
                 .note(root.getNote())
                 .sellPrice(root.getSellPrice().getAmount())
-                .wholeSalePrice(root.getSellPrice().getAmount())
+                .wholeSalePrice(root.getWholeSalePrice().getAmount())
                 .quantity(root.getQuantity())
                 .imageName(root.getImageName())
                 .imageType(root.getImageType())
                 .imageData(root.getImageData())
                 .build();
+    }
+
+    @Override
+    public ProductRoot toRoot(UpdateProductCommand command, MultipartFile file) {
+        try {
+            return ProductRoot
+                    .builder()
+                    .name(command.getName())
+                    .code(command.getCode())
+                    .article(command.getArticle())
+                    .description(command.getDescription())
+                    .category(command.getCategory())
+                    .subCategory(command.getSubCategory())
+                    .note(command.getNote())
+                    .sellPrice(Money.of(command.getSellPrice()))
+                    .wholeSalePrice(Money.of(command.getWholeSalePrice()))
+                    .quantity(command.getQuantity())
+                    .imageName(file.getName())
+                    .imageType(file.getContentType())
+                    .imageData(file.getBytes())
+                    .build();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -70,7 +95,7 @@ public class ProductCommandMapper implements AbstractProductCommandMapper {
                 .subCategory(entity.getSubCategory())
                 .note(entity.getNote())
                 .sellPrice(entity.getSellPrice())
-                .wholeSalePrice(entity.getSellPrice())
+                .wholeSalePrice(entity.getWholeSalePrice())
                 .quantity(entity.getQuantity())
                 .imageName(entity.getImageName())
                 .imageType(entity.getImageType())

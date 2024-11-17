@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Data
 @Builder
-public class AddProductCommand {
+public class UpdateProductCommand {
     private String name;
     private String description;
     private String category;

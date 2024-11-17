@@ -1,5 +1,6 @@
 package az.example.online.shopping.infrastructure.web.service.concretes;
 
+import az.example.online.shopping.infrastructure.dataaccess.entity.UserEntity;
 import az.example.online.shopping.infrastructure.web.dto.response.AuthResponseModel;
 import az.example.online.shopping.infrastructure.web.service.abstracts.AbstractJwtService;
 import io.jsonwebtoken.Claims;
@@ -14,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Service;
@@ -73,6 +75,16 @@ public class JwtService implements AbstractJwtService {
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
+    }
+
+    public String extractUsername(HttpServletRequest request) {
+        final String authHeader = request.getHeader("Authorization");
+        String userName = extractUsername(authHeader.substring(7));
+        UserDetails user = userDetailsService.loadUserByUsername(userName);
+        if(user == null){
+            throw new RuntimeException("User not found");
+        }
+        return userName;
     }
 
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {

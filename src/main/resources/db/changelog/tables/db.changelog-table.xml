@@ -11,6 +11,7 @@
     <include file="create/002-create-user-table.xml" relativeToChangelogFile="true"/>
     <include file="create/003-create-user-role-table.xml" relativeToChangelogFile="true"/>
     <include file="create/004-create-product-table.xml" relativeToChangelogFile="true"/>
+    <include file="create/005-create-updated-product-table.xml" relativeToChangelogFile="true"/>
 
 
 </databaseChangeLog>

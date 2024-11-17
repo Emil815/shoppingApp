@@ -21,6 +21,8 @@ public interface AbstractJwtService {
 
     String extractUsername(String token);
 
+    String extractUsername(HttpServletRequest request);
+
     <T> T extractClaim(String token, Function<Claims, T> claimsResolver);
 
     boolean isTokenValid(String token, String username);
