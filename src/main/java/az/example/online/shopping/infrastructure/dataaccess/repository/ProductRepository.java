@@ -11,5 +11,5 @@ import java.util.UUID;
 @Repository
 public interface ProductRepository extends JpaRepository<ProductEntity, UUID>, JpaSpecificationExecutor<ProductEntity> {
 
-    Optional<ProductEntity> findByCode(String code);
+    Optional<ProductEntity> findByCodeAndIsActive(String code, boolean isActive);
 }

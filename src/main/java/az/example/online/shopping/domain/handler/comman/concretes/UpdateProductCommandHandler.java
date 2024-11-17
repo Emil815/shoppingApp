@@ -7,11 +7,12 @@ import az.example.online.shopping.infrastructure.dataaccess.entity.UpdatedProduc
 import az.example.online.shopping.infrastructure.dataaccess.repository.ProductRepository;
 import az.example.online.shopping.infrastructure.dataaccess.repository.UpdatedProductHistoryRepository;
 import az.example.online.shopping.infrastructure.web.dto.request.command.UpdateProductCommand;
-import az.example.online.shopping.infrastructure.web.dto.response.ProductResponse;
+import az.example.online.shopping.infrastructure.web.dto.response.ProductResponseModel;
 import az.example.online.shopping.infrastructure.web.service.abstracts.AbstractJwtService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
@@ -22,9 +23,10 @@ public class UpdateProductCommandHandler {
     private final AbstractProductCommandMapper productCommandMapper;
     private final AbstractJwtService jwtService;
 
-    public ProductResponse handle(UpdateProductCommand command, MultipartFile file, HttpServletRequest request) {
+    @Transactional
+    public ProductResponseModel handle(UpdateProductCommand command, MultipartFile file, HttpServletRequest request) {
         ProductRoot productRoot = productCommandMapper.toRoot(command, file);
-        ProductEntity fetchedProduct = productRepository.findByCode(command.getCode())
+        ProductEntity fetchedProduct = productRepository.findByCodeAndIsActive(command.getCode(), true)
                 .map(item -> {
 
                     item.setIsActive(Boolean.FALSE);
@@ -38,7 +40,7 @@ public class UpdateProductCommandHandler {
                 .builder()
                 .updatedToId(savedProduct.getId())
                 .updatedFromId(fetchedProduct.getId())
-                .author(jwtService.extractUsername(request))
+                .author(jwtService.extractUser(request).getUsername())
                 .build();
         updatedProductHistoryRepository.save(updatedProductHistoryEntity);
         return productCommandMapper.toResponseModel(savedProduct);

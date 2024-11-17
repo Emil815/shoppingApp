@@ -37,7 +37,9 @@ public class SecurityConfig {
                                 "/api/product/**",
                                 "/swagger-ui/**",
                                 "/v3/api-docs/**").permitAll()
-                        .requestMatchers("/api/admin/**").hasRole(RoleEnum.ROLE_ADMIN.getRole())
+                        .requestMatchers("/api/admin/**").hasAnyRole(RoleEnum.ROLE_ADMIN.getRole(), RoleEnum.ROLE_USER.getRole())
+                        .requestMatchers("/api/moderator/**").hasAnyRole(RoleEnum.ROLE_ADMIN.getRole(), RoleEnum.ROLE_USER.getRole())
+                        .requestMatchers("/api/basket/**").hasAnyRole(RoleEnum.ROLE_USER.getRole(), RoleEnum.ROLE_ADMIN.getRole())
                         .anyRequest().authenticated()
 
 

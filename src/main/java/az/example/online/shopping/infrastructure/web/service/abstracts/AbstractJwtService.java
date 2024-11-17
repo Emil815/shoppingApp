@@ -1,10 +1,12 @@
 package az.example.online.shopping.infrastructure.web.service.abstracts;
 
+import az.example.online.shopping.infrastructure.dataaccess.entity.UserEntity;
 import az.example.online.shopping.infrastructure.web.dto.response.AuthResponseModel;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.NonNull;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Map;
 import java.util.function.Function;
@@ -19,9 +21,11 @@ public interface AbstractJwtService {
 
     Claims extractAllClaims(String token);
 
-    String extractUsername(String token);
+    String extractUser(String token);
 
-    String extractUsername(HttpServletRequest request);
+    UserDetails extractUser(HttpServletRequest request);
+
+    UserEntity extractUserEntity(HttpServletRequest request);
 
     <T> T extractClaim(String token, Function<Claims, T> claimsResolver);
 

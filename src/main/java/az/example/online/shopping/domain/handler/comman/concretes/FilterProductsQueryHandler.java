@@ -4,7 +4,7 @@ import az.example.online.shopping.domain.mapper.concretes.ProductCommandMapper;
 import az.example.online.shopping.domain.specification.ProductSpecification;
 import az.example.online.shopping.infrastructure.dataaccess.entity.ProductEntity;
 import az.example.online.shopping.infrastructure.dataaccess.repository.ProductRepository;
-import az.example.online.shopping.infrastructure.web.dto.response.ProductResponse;
+import az.example.online.shopping.infrastructure.web.dto.response.ProductResponseModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,13 +19,13 @@ public class FilterProductsQueryHandler {
     private final ProductRepository productRepository;
     private final ProductCommandMapper productCommandMapper;
 
-    public Page<ProductResponse> handle(String name,
-                                        String category,
-                                        String subCategory,
-                                        BigDecimal minPrice,
-                                        BigDecimal maxPrice,
-                                        Pageable pageable,
-                                        Boolean isWholeSale) {
+    public Page<ProductResponseModel> handle(String name,
+                                             String category,
+                                             String subCategory,
+                                             BigDecimal minPrice,
+                                             BigDecimal maxPrice,
+                                             Pageable pageable,
+                                             Boolean isWholeSale) {
         Specification<ProductEntity> spec = Specification.where(
                 ProductSpecification.hasName(name)
                         .and(ProductSpecification.hasCategory(category))

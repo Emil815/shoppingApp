@@ -4,7 +4,7 @@ import az.example.online.shopping.domain.handler.comman.concretes.AddProductComm
 import az.example.online.shopping.domain.handler.comman.concretes.UpdateProductCommandHandler;
 import az.example.online.shopping.infrastructure.web.dto.request.command.AddProductCommand;
 import az.example.online.shopping.infrastructure.web.dto.request.command.UpdateProductCommand;
-import az.example.online.shopping.infrastructure.web.dto.response.ProductResponse;
+import az.example.online.shopping.infrastructure.web.dto.response.ProductResponseModel;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -25,7 +25,7 @@ public class AdminController {
             consumes = {MediaType.MULTIPART_FORM_DATA_VALUE,
                     MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<ProductResponse> addProduct(
+    public ResponseEntity<ProductResponseModel> addProduct(
             @RequestPart("command") AddProductCommand command,
             @RequestPart("file") MultipartFile file
     ) {
@@ -39,7 +39,7 @@ public class AdminController {
             consumes = {MediaType.MULTIPART_FORM_DATA_VALUE,
                     MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<ProductResponse> updateProduct(
+    public ResponseEntity<ProductResponseModel> updateProduct(
             @RequestPart("command") UpdateProductCommand command,
             @RequestPart("file") MultipartFile file,
             HttpServletRequest request

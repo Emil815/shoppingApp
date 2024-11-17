@@ -6,7 +6,7 @@ import az.example.online.shopping.domain.valueobjects.Money;
 import az.example.online.shopping.infrastructure.dataaccess.entity.ProductEntity;
 import az.example.online.shopping.infrastructure.web.dto.request.command.AddProductCommand;
 import az.example.online.shopping.infrastructure.web.dto.request.command.UpdateProductCommand;
-import az.example.online.shopping.infrastructure.web.dto.response.ProductResponse;
+import az.example.online.shopping.infrastructure.web.dto.response.ProductResponseModel;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -84,8 +84,8 @@ public class ProductCommandMapper implements AbstractProductCommandMapper {
     }
 
     @Override
-    public ProductResponse toResponseModel(ProductEntity entity) {
-        return ProductResponse
+    public ProductResponseModel toResponseModel(ProductEntity entity) {
+        return ProductResponseModel
                 .builder()
                 .name(entity.getName())
                 .code(entity.getCode())

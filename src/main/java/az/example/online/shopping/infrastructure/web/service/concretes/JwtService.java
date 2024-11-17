@@ -1,6 +1,7 @@
 package az.example.online.shopping.infrastructure.web.service.concretes;
 
 import az.example.online.shopping.infrastructure.dataaccess.entity.UserEntity;
+import az.example.online.shopping.infrastructure.dataaccess.repository.UserRepository;
 import az.example.online.shopping.infrastructure.web.dto.response.AuthResponseModel;
 import az.example.online.shopping.infrastructure.web.service.abstracts.AbstractJwtService;
 import io.jsonwebtoken.Claims;
@@ -29,6 +30,7 @@ import java.util.function.Function;
 @RequiredArgsConstructor
 public class JwtService implements AbstractJwtService {
     private final UserDetailsService userDetailsService;
+    private final UserRepository userRepository;
 
     @Value("${jwt.secret}")
     private String secretKey;
@@ -73,18 +75,25 @@ public class JwtService implements AbstractJwtService {
                 .getBody();
     }
 
-    public String extractUsername(String token) {
+    public String extractUser(String token) {
         return extractClaim(token, Claims::getSubject);
     }
 
-    public String extractUsername(HttpServletRequest request) {
+    public UserDetails extractUser(HttpServletRequest request) {
         final String authHeader = request.getHeader("Authorization");
-        String userName = extractUsername(authHeader.substring(7));
+        String userName = extractUser(authHeader.substring(7));
         UserDetails user = userDetailsService.loadUserByUsername(userName);
-        if(user == null){
+        if (user == null) {
             throw new RuntimeException("User not found");
         }
-        return userName;
+        return user;
+    }
+
+    @Override
+    public UserEntity extractUserEntity(HttpServletRequest request) {
+        final String authHeader = request.getHeader("Authorization");
+        String userName = extractUser(authHeader.substring(7));
+        return userRepository.findByPhoneNumber(userName).orElseThrow(() -> new RuntimeException("User not found"));
     }
 
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
@@ -93,7 +102,7 @@ public class JwtService implements AbstractJwtService {
     }
 
     public boolean isTokenValid(String token, String username) {
-        return extractUsername(token).equals(username) && !isTokenExpired(token);
+        return extractUser(token).equals(username) && !isTokenExpired(token);
     }
 
     public boolean isTokenExpired(String token) {
@@ -109,7 +118,7 @@ public class JwtService implements AbstractJwtService {
 
 
             jwt = authHeader.substring(7);
-            username = extractUsername(jwt);
+            username = extractUser(jwt);
 
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 var userDetails = userDetailsService.loadUserByUsername(username);
@@ -126,7 +135,7 @@ public class JwtService implements AbstractJwtService {
             String tokenType = claims.get("type", String.class);
 
             if ("REFRESH".equals(tokenType) && !isTokenExpired(jwt)) {
-                String phoneNumber = extractUsername(jwt);
+                String phoneNumber = extractUser(jwt);
                 return AuthResponseModel.builder()
                         .accessToken(generateAccessToken(phoneNumber))
                         .refreshToken(jwt)

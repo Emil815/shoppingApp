@@ -12,6 +12,8 @@
     <include file="create/003-create-user-role-table.xml" relativeToChangelogFile="true"/>
     <include file="create/004-create-product-table.xml" relativeToChangelogFile="true"/>
     <include file="create/005-create-updated-product-table.xml" relativeToChangelogFile="true"/>
+    <include file="create/006-create-basket-table.xml" relativeToChangelogFile="true"/>
+    <include file="create/007-create-basket-item-table.xml" relativeToChangelogFile="true"/>
 
 
 </databaseChangeLog>

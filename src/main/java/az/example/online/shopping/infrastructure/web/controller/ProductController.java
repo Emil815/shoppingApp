@@ -1,7 +1,7 @@
 package az.example.online.shopping.infrastructure.web.controller;
 
 import az.example.online.shopping.domain.handler.comman.concretes.FilterProductsQueryHandler;
-import az.example.online.shopping.infrastructure.web.dto.response.ProductResponse;
+import az.example.online.shopping.infrastructure.web.dto.response.ProductResponseModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,7 +18,7 @@ public class ProductController {
     private final FilterProductsQueryHandler filterProductsQueryHandler;
 
     @GetMapping("/filter")
-    public Page<ProductResponse> filterProducts(
+    public Page<ProductResponseModel> filterProducts(
             @RequestParam(required = false) String name,
             @RequestParam(required = false) String category,
             @RequestParam(required = false) String subCategory,
