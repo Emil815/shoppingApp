@@ -36,10 +36,11 @@ public class SecurityConfig {
                                 "/api/auth/**",
                                 "/api/product/**",
                                 "/swagger-ui/**",
-                                "/v3/api-docs/**").permitAll()
-                        .requestMatchers("/api/admin/**").hasAnyRole(RoleEnum.ROLE_ADMIN.getRole(), RoleEnum.ROLE_USER.getRole())
-                        .requestMatchers("/api/moderator/**").hasAnyRole(RoleEnum.ROLE_ADMIN.getRole(), RoleEnum.ROLE_USER.getRole())
-                        .requestMatchers("/api/basket/**").hasAnyRole(RoleEnum.ROLE_USER.getRole(), RoleEnum.ROLE_ADMIN.getRole())
+                                "/v3/api-docs/**",
+                                "/api/admin/**","/api/moderator/**","/api/basket/**").permitAll()
+//                        .requestMatchers("/api/admin/**").hasAnyRole(RoleEnum.ROLE_ADMIN.getRole(), RoleEnum.ROLE_USER.getRole())
+//                        .requestMatchers("/api/moderator/**").hasAnyRole(RoleEnum.ROLE_ADMIN.getRole(), RoleEnum.ROLE_USER.getRole())
+//                        .requestMatchers("/api/basket/**").hasAnyRole(RoleEnum.ROLE_USER.getRole(), RoleEnum.ROLE_ADMIN.getRole())
                         .anyRequest().authenticated()
 
 
