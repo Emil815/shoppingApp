@@ -1,6 +1,6 @@
 package az.example.online.shopping.infrastructure.web.controller;
 
-import az.example.online.shopping.domain.handler.comman.concretes.SignUpCommandHandler;
+import az.example.online.shopping.domain.handler.command.concretes.SignUpCommandHandler;
 import az.example.online.shopping.infrastructure.web.dto.request.command.LoginCommand;
 import az.example.online.shopping.infrastructure.web.dto.request.command.UserSignUpCommand;
 import az.example.online.shopping.infrastructure.web.dto.response.AuthResponseModel;

@@ -6,7 +6,7 @@
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
 
     <!-- ChangeSet to create the basket_items table -->
-    <changeSet id="1_create_basket_items_table" author="emil.mammadov">
+    <changeSet id="009_create_basket_item_table" author="emil.mammadov">
         <createTable tableName="basket_items">
             <!-- Primary key -->
             <column name="id" type="UUID">

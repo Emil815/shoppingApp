@@ -1,4 +1,4 @@
-package az.example.online.shopping.domain.handler.comman.concretes;
+package az.example.online.shopping.domain.handler.command.concretes;
 
 import az.example.online.shopping.domain.mapper.abstracts.AbstractBasketItemCommandMapper;
 import az.example.online.shopping.domain.valueobjects.BasketStatus;

@@ -1,6 +1,5 @@
 package az.example.online.shopping.infrastructure.web.config;
 
-import az.example.online.shopping.domain.valueobjects.RoleEnum;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -37,7 +36,7 @@ public class SecurityConfig {
                                 "/api/product/**",
                                 "/swagger-ui/**",
                                 "/v3/api-docs/**",
-                                "/api/admin/**","/api/moderator/**","/api/basket/**").permitAll()
+                                "/api/admin/**","/api/moderator/**","/api/basket/**","/api/track/**").permitAll()
 //                        .requestMatchers("/api/admin/**").hasAnyRole(RoleEnum.ROLE_ADMIN.getRole(), RoleEnum.ROLE_USER.getRole())
 //                        .requestMatchers("/api/moderator/**").hasAnyRole(RoleEnum.ROLE_ADMIN.getRole(), RoleEnum.ROLE_USER.getRole())
 //                        .requestMatchers("/api/basket/**").hasAnyRole(RoleEnum.ROLE_USER.getRole(), RoleEnum.ROLE_ADMIN.getRole())

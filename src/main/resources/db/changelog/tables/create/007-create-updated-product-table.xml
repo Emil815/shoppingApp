@@ -7,7 +7,7 @@
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
     <!-- ChangeSet for creating updated_product_history table -->
-    <changeSet id="005_create_updated_product_table" author="emil.mammadov">
+    <changeSet id="007_create_updated_product_table" author="emil.mammadov">
         <createTable tableName="updated_product_history">
             <column name="id" type="UUID">
                 <constraints primaryKey="true" nullable="false"/>

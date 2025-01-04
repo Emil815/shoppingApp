@@ -5,11 +5,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Builder
-public class ErrorResponseModel {
-    private String message;
-    private String debug;
+public class SubCategoryResponseModel {
+    private String mainCategoryName;
+    private List<String> subCategoryNames;
 }

@@ -1,4 +1,4 @@
-package az.example.online.shopping.infrastructure.web.dto.response;
+package az.example.online.shopping.infrastructure.web.dto.request.command;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Builder
-public class ErrorResponseModel {
-    private String message;
-    private String debug;
+public class ProductCategoryCommand {
+    private String name;
 }

@@ -7,7 +7,7 @@
 
 
     <!-- ChangeSet to create the baskets table -->
-    <changeSet id="006_create_basket_table" author="emil.mammadov">
+    <changeSet id="008_create_basket_table" author="emil.mammadov">
         <createTable tableName="baskets">
             <column name="id" type="UUID">
                 <constraints primaryKey="true" nullable="false"/>

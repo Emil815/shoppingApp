@@ -20,8 +20,7 @@ public class ProductRoot extends BaseRoot<UUID> {
     private String code;
     private String article;
     private String description;
-    private String category;
-    private String subCategory;
+    private SubCategoryRoot subCategoryRoot;
     private String note;
     private Money sellPrice;
     private Money wholeSalePrice;

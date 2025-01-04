@@ -10,10 +10,13 @@
     <include file="create/001-create-role-table.xml" relativeToChangelogFile="true"/>
     <include file="create/002-create-user-table.xml" relativeToChangelogFile="true"/>
     <include file="create/003-create-user-role-table.xml" relativeToChangelogFile="true"/>
-    <include file="create/004-create-product-table.xml" relativeToChangelogFile="true"/>
-    <include file="create/005-create-updated-product-table.xml" relativeToChangelogFile="true"/>
-    <include file="create/006-create-basket-table.xml" relativeToChangelogFile="true"/>
-    <include file="create/007-create-basket-item-table.xml" relativeToChangelogFile="true"/>
-
+    <include file="create/004-create-category-table.xml" relativeToChangelogFile="true"/>
+    <include file="create/005-create-subcategory-table.xml" relativeToChangelogFile="true"/>
+    <include file="create/006-create-product-table.xml" relativeToChangelogFile="true"/>
+    <include file="create/007-create-updated-product-table.xml" relativeToChangelogFile="true"/>
+    <include file="create/008-create-basket-table.xml" relativeToChangelogFile="true"/>
+    <include file="create/009-create-basket-item-table.xml" relativeToChangelogFile="true"/>
+    <include file="create/010-create-sales-table.xml" relativeToChangelogFile="true"/>
+    <include file="create/011-create-search-tracking-table.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

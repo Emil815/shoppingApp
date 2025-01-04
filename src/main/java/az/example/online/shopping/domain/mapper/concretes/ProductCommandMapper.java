@@ -1,9 +1,13 @@
 package az.example.online.shopping.domain.mapper.concretes;
 
 import az.example.online.shopping.domain.mapper.abstracts.AbstractProductCommandMapper;
+import az.example.online.shopping.domain.roots.CategoryRoot;
 import az.example.online.shopping.domain.roots.ProductRoot;
+import az.example.online.shopping.domain.roots.SubCategoryRoot;
 import az.example.online.shopping.domain.valueobjects.Money;
+import az.example.online.shopping.infrastructure.dataaccess.entity.CategoryEntity;
 import az.example.online.shopping.infrastructure.dataaccess.entity.ProductEntity;
+import az.example.online.shopping.infrastructure.dataaccess.entity.SubCategoryEntity;
 import az.example.online.shopping.infrastructure.web.dto.request.command.AddProductCommand;
 import az.example.online.shopping.infrastructure.web.dto.request.command.UpdateProductCommand;
 import az.example.online.shopping.infrastructure.web.dto.response.ProductResponseModel;
@@ -23,8 +27,10 @@ public class ProductCommandMapper implements AbstractProductCommandMapper {
                     .code(command.getCode())
                     .article(command.getArticle())
                     .description(command.getDescription())
-                    .category(command.getCategory())
-                    .subCategory(command.getSubCategory())
+                    .subCategoryRoot(SubCategoryRoot.builder()
+                            .name(command.getSubCategory())
+                            .category(CategoryRoot.builder().name(command.getCategory()).build())
+                            .build())
                     .note(command.getNote())
                     .sellPrice(Money.of(command.getSellPrice()))
                     .wholeSalePrice(Money.of(command.getWholeSalePrice()))
@@ -47,8 +53,13 @@ public class ProductCommandMapper implements AbstractProductCommandMapper {
                 .description(root.getDescription())
                 .code(root.getCode())
                 .article(root.getArticle())
-                .category(root.getCategory())
-                .subCategory(root.getSubCategory())
+                .subCategory(SubCategoryEntity
+                        .builder()
+                        .name(root.getSubCategoryRoot().getName())
+                        .category(CategoryEntity.builder().name(
+                                root.getSubCategoryRoot().getCategory().getName()
+                        ).build())
+                        .build())
                 .note(root.getNote())
                 .sellPrice(root.getSellPrice().getAmount())
                 .wholeSalePrice(root.getWholeSalePrice().getAmount())
@@ -68,8 +79,10 @@ public class ProductCommandMapper implements AbstractProductCommandMapper {
                     .code(command.getCode())
                     .article(command.getArticle())
                     .description(command.getDescription())
-                    .category(command.getCategory())
-                    .subCategory(command.getSubCategory())
+                    .subCategoryRoot(SubCategoryRoot.builder()
+                            .name(command.getSubCategory())
+                            .category(CategoryRoot.builder().name(command.getCategory()).build())
+                            .build())
                     .note(command.getNote())
                     .sellPrice(Money.of(command.getSellPrice()))
                     .wholeSalePrice(Money.of(command.getWholeSalePrice()))
@@ -91,8 +104,8 @@ public class ProductCommandMapper implements AbstractProductCommandMapper {
                 .code(entity.getCode())
                 .article(entity.getArticle())
                 .description(entity.getDescription())
-                .category(entity.getCategory())
-                .subCategory(entity.getSubCategory())
+                .category(entity.getSubCategory().getCategory().getName())
+                .subCategory(entity.getSubCategory().getName())
                 .note(entity.getNote())
                 .sellPrice(entity.getSellPrice())
                 .wholeSalePrice(entity.getWholeSalePrice())

@@ -1,10 +1,13 @@
 package az.example.online.shopping.infrastructure.web.controller;
 
-import az.example.online.shopping.domain.handler.comman.concretes.AddProductCommandHandler;
-import az.example.online.shopping.domain.handler.comman.concretes.UpdateProductCommandHandler;
+import az.example.online.shopping.domain.handler.command.concretes.*;
+import az.example.online.shopping.infrastructure.web.dto.request.command.ProductCategoryCommand;
 import az.example.online.shopping.infrastructure.web.dto.request.command.AddProductCommand;
+import az.example.online.shopping.infrastructure.web.dto.request.command.ProductSubCategoryCommand;
 import az.example.online.shopping.infrastructure.web.dto.request.command.UpdateProductCommand;
+import az.example.online.shopping.infrastructure.web.dto.response.CategoryResponseModel;
 import az.example.online.shopping.infrastructure.web.dto.response.ProductResponseModel;
+import az.example.online.shopping.infrastructure.web.dto.response.SubCategoryResponseModel;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,6 +25,10 @@ import org.springframework.web.multipart.MultipartFile;
 public class AdminController {
     private final AddProductCommandHandler addProductCommandHandler;
     private final UpdateProductCommandHandler updateProductCommandHandler;
+    private final AddProductCategoryCommandHandler addProductCategoryCommandHandler;
+    private final DeleteProductCategoryCommandHandler deleteProductCategoryCommandHandler;
+    private final AddProductSubCategoryCommandHandler addProductSubCategoryCommandHandler;
+    private final DeleteProductSubCategoryCommandHandler deleteProductSubCategoryCommandHandler;
     private final ObjectMapper objectMapper;
 
     @PostMapping(value = "product/add",
@@ -53,4 +60,38 @@ public class AdminController {
                 updateProductCommandHandler.handle(updateProductCommand, file, request), HttpStatus.CREATED);
 
     }
+
+    @PostMapping(value = "category/add")
+    public ResponseEntity<CategoryResponseModel> addCategory(@RequestBody ProductCategoryCommand command) {
+        return new ResponseEntity<>(addProductCategoryCommandHandler
+                .handle(command), HttpStatus.CREATED);
+
+
+    }
+
+    @DeleteMapping(value = "category/delete")
+    public ResponseEntity<CategoryResponseModel> deleteCategory(@RequestBody ProductCategoryCommand command) {
+        return new ResponseEntity<>(deleteProductCategoryCommandHandler
+                .handle(command), HttpStatus.ACCEPTED);
+
+
+    }
+
+    @PostMapping(value = "category/sub/add")
+    public ResponseEntity<SubCategoryResponseModel> addSubCategory(@RequestBody ProductSubCategoryCommand command) {
+        return new ResponseEntity<>(addProductSubCategoryCommandHandler
+                .handle(command), HttpStatus.CREATED);
+
+
+    }
+
+    @DeleteMapping(value = "category/sub/delete")
+    public ResponseEntity<SubCategoryResponseModel> deleteSubCategory(@RequestBody ProductSubCategoryCommand command) {
+        return new ResponseEntity<>(deleteProductSubCategoryCommandHandler
+                .handle(command), HttpStatus.ACCEPTED);
+
+
+    }
+
+
 }
