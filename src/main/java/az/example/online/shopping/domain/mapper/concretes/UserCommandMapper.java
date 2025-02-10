@@ -26,6 +26,7 @@ public class UserCommandMapper implements AbstractUserCommandMapper {
                 .surname(command.getSurname())
                 .password(command.getPassword())
                 .phoneNumber(command.getPhoneNumber())
+                .isWholeSale(command.getIsWholeSale())
                 .build();
     }
 
@@ -42,6 +43,7 @@ public class UserCommandMapper implements AbstractUserCommandMapper {
                         .stream()
                         .map(this.roleCommandMapper::toRoot)
                         .collect(Collectors.toSet()))
+                .isWholeSale(entity.getIsWholeSale())
                 .build();
     }
 
@@ -58,6 +60,7 @@ public class UserCommandMapper implements AbstractUserCommandMapper {
                         .stream()
                         .map(this.roleCommandMapper::toEntity)
                         .collect(Collectors.toSet()))
+                .isWholeSale(root.getIsWholeSale())
                 .build();
     }
 }

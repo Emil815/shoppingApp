@@ -15,6 +15,7 @@ public class UserSignUpCommand {
     private String surname;
     private String password;
     private String phoneNumber;
+    private Boolean isWholeSale;
 
     public UserEntity toEntity() {
         return UserEntity.builder()

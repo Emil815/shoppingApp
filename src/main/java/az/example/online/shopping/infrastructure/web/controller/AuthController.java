@@ -1,10 +1,12 @@
 package az.example.online.shopping.infrastructure.web.controller;
 
 import az.example.online.shopping.domain.handler.command.concretes.SignUpCommandHandler;
+import az.example.online.shopping.domain.handler.query.UserInfoQueryHandler;
 import az.example.online.shopping.infrastructure.web.dto.request.command.LoginCommand;
 import az.example.online.shopping.infrastructure.web.dto.request.command.UserSignUpCommand;
 import az.example.online.shopping.infrastructure.web.dto.response.AuthResponseModel;
 import az.example.online.shopping.infrastructure.web.dto.response.SignUpResponseModel;
+import az.example.online.shopping.infrastructure.web.dto.response.UserInfoResponseModel;
 import az.example.online.shopping.infrastructure.web.service.abstracts.AbstractJwtService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin("*")
 public class AuthController {
     private final SignUpCommandHandler signUpCommandHandler;
+    private final UserInfoQueryHandler userInfoQueryHandler;
     private final AuthenticationManager authenticationManager;
     private final AbstractJwtService jwtService;
 
@@ -49,5 +52,11 @@ public class AuthController {
         AuthResponseModel responseModel =
                 jwtService.validateRefreshTokenAndGenerateAccessToken(request, response);
         return new ResponseEntity<>(responseModel, HttpStatus.OK);
+    }
+
+    @PostMapping("/me")
+    public ResponseEntity<UserInfoResponseModel> me(HttpServletRequest request
+    ) {
+        return new ResponseEntity<>(userInfoQueryHandler.handle(request), HttpStatus.OK);
     }
 }

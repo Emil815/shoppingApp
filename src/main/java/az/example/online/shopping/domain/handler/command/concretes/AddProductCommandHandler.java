@@ -20,7 +20,6 @@ public class AddProductCommandHandler {
     private final ProductRepository productRepository;
     private final AbstractProductCommandMapper productCommandMapper;
     private final ProductCategoryRepository productCategoryRepository;
-    private final ProductSubCategoryRepository productSubCategoryRepository;
 
     public ProductResponseModel handle(AddProductCommand command, MultipartFile file) {
         ProductRoot productRoot = productCommandMapper.toRoot(command, file);

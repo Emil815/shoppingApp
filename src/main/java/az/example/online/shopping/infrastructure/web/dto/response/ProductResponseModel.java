@@ -21,7 +21,7 @@ public class ProductResponseModel {
     private String note;
     private BigDecimal sellPrice;
     private BigDecimal wholeSalePrice;
-    private Integer quantity;
+    private Integer piecesOfPack;
     private String imageName;
     private String imageType;
     private byte[] imageData;

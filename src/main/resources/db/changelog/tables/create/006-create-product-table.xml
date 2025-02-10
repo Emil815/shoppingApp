@@ -30,7 +30,7 @@
             <column name="whole_sale_price" type="DECIMAL(19, 2)">
                 <constraints nullable="false"/>
             </column>
-            <column name="quantity" type="INT">
+            <column name="pieces_of_pack" type="INT">
                 <constraints nullable="false"/>
             </column>
             <column name="image_name" type="VARCHAR(255)">

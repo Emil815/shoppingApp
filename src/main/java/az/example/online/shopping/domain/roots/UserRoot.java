@@ -23,6 +23,7 @@ public class UserRoot extends BaseRoot<UUID> implements UserDetails {
     private String surname;
     private String password;
     private String phoneNumber;
+    private Boolean isWholeSale;
 
     private Set<RoleRoot> roles;
 

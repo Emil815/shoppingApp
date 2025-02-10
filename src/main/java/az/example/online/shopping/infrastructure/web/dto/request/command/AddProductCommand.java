@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,7 +19,7 @@ public class AddProductCommand {
     private String note;
     private BigDecimal sellPrice;
     private BigDecimal wholeSalePrice;
-    private Integer quantity;
+    private Integer piecesOfPack;
     private String code;
     private String article;
 

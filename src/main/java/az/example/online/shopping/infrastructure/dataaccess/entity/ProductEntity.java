@@ -35,7 +35,7 @@ public class ProductEntity extends BaseEntity {
     private BigDecimal wholeSalePrice;
 
     @Column(nullable = false)
-    private Integer quantity;
+    private Integer piecesOfPack;
 
     @Column(nullable = false)
     private String imageName;

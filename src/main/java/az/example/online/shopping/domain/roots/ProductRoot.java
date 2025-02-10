@@ -24,7 +24,7 @@ public class ProductRoot extends BaseRoot<UUID> {
     private String note;
     private Money sellPrice;
     private Money wholeSalePrice;
-    private Integer quantity;
+    private Integer pieceOfPack;
     private String imageName;
     private String imageType;
     private byte[] imageData;

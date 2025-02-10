@@ -36,6 +36,9 @@
             <column name="phone_number" type="varchar(20)">
                 <constraints nullable="false" unique="true"/>
             </column>
+            <column name="is_whole_sale" type="boolean">
+                <constraints nullable="false" />
+            </column>
         </createTable>
     </changeSet>
 

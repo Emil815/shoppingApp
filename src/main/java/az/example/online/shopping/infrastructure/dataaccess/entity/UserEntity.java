@@ -29,8 +29,11 @@ public class UserEntity extends BaseEntity {
     private String password;
 
     @Column(unique = true, nullable = false)
-
     private String phoneNumber;
+
+    @Column(unique = true, nullable = false)
+    private Boolean isWholeSale;
+
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
